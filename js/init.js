@@ -13,4 +13,34 @@
     });
   }
 
+  function computeStatsWithoutReduce() {
+    var sums = { win: 0, mac: 0 };
+
+    fonts.forEach(function (font) {
+      sums.win += font.win;
+      sums.mac += font.mac;
+    });
+
+    sums.win /= fonts.length;
+    sums.mac /= fonts.length;
+
+    return sums;
+  }
+
+  function computeStatsWithReduce() {
+    var sums = fonts.reduce(sumWinAndMacStatus, { win: 0, mac: 0 });
+
+    function sumWinAndMacStatus (accum, font) {
+      accum.win += font.win;
+      accum.mac += font.mac;
+      return accum;
+    }
+
+    sums.win /= fonts.length;
+    sums.mac /= fonts.length;
+
+    return sums;
+  }
+
+
 })();
