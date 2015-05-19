@@ -67,7 +67,7 @@
         font.type +
         '</p><button data-hi="Pat" data-font="' +
         font.family +
-        '" class="font-preview">Preview</button></div>';
+        '" class="font-preview shiny-button">Preview</button></div>';
     }).join('');
   }
 
@@ -77,7 +77,7 @@
 
   function handleFontPreview() {
     document.querySelector('.font-list').addEventListener('click', function (e) {
-      if (e.target.className === 'font-preview') {
+      if (e.target.className.split(' ').indexOf('font-preview') >= 0) {
         setBodyFont(e.target.dataset.font);
       }
     });
