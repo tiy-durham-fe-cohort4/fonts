@@ -4,6 +4,7 @@
   sanitizeFonts();
   drawStats();
   drawFonts(90);
+  handleFontPreview();
 
   function sanitizeFonts() {
     fonts.forEach(function (font) {
@@ -60,15 +61,29 @@
   function fontsToHTML(fonts) {
     return fonts.map(function (font) {
       return '<div class="font-container"><h2>' +
-        font.family + 
+        font.family +
         '</h2><p>' +
         font.type +
-        '</p></div>';
+        '</p><button data-hi="Pat" data-font="' +
+        font.family +
+        '" class="font-preview">Preview</button></div>';
     }).join('');
   }
 
   function drawFonts(percentage) {
     document.querySelector('.font-list').innerHTML = fontsToHTML(fontsWithSupport(percentage));
+  }
+
+  function handleFontPreview() {
+    document.querySelector('.font-list').addEventListener('click', function (e) {
+      if (e.target.className === 'font-preview') {
+        setBodyFont(e.target.dataset.font);
+      }
+    });
+  }
+
+  function setBodyFont(family) {
+    document.body.style.fontFamily = family;
   }
 
 })();
