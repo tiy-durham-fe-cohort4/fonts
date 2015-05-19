@@ -5,6 +5,7 @@
   drawStats();
   drawFonts(90);
   handleFontPreview();
+  handleFilterChange();
 
   function sanitizeFonts() {
     fonts.forEach(function (font) {
@@ -84,6 +85,12 @@
 
   function setBodyFont(family) {
     document.body.style.fontFamily = family;
+  }
+
+  function handleFilterChange() {
+    document.querySelector('.font-list-filter').addEventListener('change', function (e) {
+      drawFonts(parseInt(e.target.value));
+    });
   }
 
 })();
