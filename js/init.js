@@ -3,6 +3,7 @@
 
   sanitizeFonts();
   drawStats();
+  drawFonts(90);
 
   function sanitizeFonts() {
     fonts.forEach(function (font) {
@@ -46,8 +47,28 @@
   function drawStats() {
     var stats = computeStatsWithReduce();
 
-    document.querySelector('.win-stats .percentage').textContent = Math.round(stats.win);
-    document.querySelector('.mac-stats .percentage').textContent = Math.round(stats.mac);
+    document.querySelector('.win-stats .percentage').textContent = Math.round(stats.win * 100) / 100;
+    document.querySelector('.mac-stats .percentage').textContent = Math.round(stats.mac * 100) / 100;
+  }
+
+  function fontsWithSupport(percentage) {
+    return fonts.filter(function (font) {
+      return font.mac >= percentage && font.win >= percentage;
+    });
+  }
+
+  function fontsToHTML(fonts) {
+    return fonts.map(function (font) {
+      return '<div class="font-container"><h2>' +
+        font.family + 
+        '</h2><p>' +
+        font.type +
+        '</p></div>';
+    }).join('');
+  }
+
+  function drawFonts(percentage) {
+    document.querySelector('.font-list').innerHTML = fontsToHTML(fontsWithSupport(percentage));
   }
 
 })();
