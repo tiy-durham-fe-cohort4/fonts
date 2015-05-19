@@ -2,6 +2,7 @@
   'use strict';
 
   sanitizeFonts();
+  drawStats();
 
   function sanitizeFonts() {
     fonts.forEach(function (font) {
@@ -42,5 +43,11 @@
     return sums;
   }
 
+  function drawStats() {
+    var stats = computeStatsWithReduce();
+
+    document.querySelector('.win-stats .percentage').textContent = Math.round(stats.win);
+    document.querySelector('.mac-stats .percentage').textContent = Math.round(stats.mac);
+  }
 
 })();
